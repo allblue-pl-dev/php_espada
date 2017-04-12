@@ -41,6 +41,8 @@ class Espada
 		$page = \E\Pages::Get($page_name);
 		if ($page === null)
 			throw new \Exception("Page `{$page_name}` does not exist.");
+
+		Espada::SetPage($page);
 	}
 
 	static public function Create()
@@ -90,7 +92,7 @@ class Espada
 			$class_path .= '/' . $class_array[$i];
 		$class_path .= '.php';
 
-		$class_path = E\Package::GetFilePath($class_array[0], $class_path);
+		$class_path = E\Package::Path($class_array[0], $class_path);
 
 		if ($class_path === null)
 			return false;
@@ -132,7 +134,7 @@ class Espada
 	// 		$class_path .= $class_array[$i] . '/';
 	// 	$class_path .= implode('_', $class_array) . '.php';
 	//
-	// 	$class_path = \E\Package::GetFilePath($class_array[0], $class_path);
+	// 	$class_path = \E\Package::Path($class_array[0], $class_path);
 	//
 	// 	if ($class_path === null) {
 	// 		// throw new \Exception('Class `' . $class . '` does not exist.');
@@ -180,7 +182,7 @@ class Espada
 		if (count($page_path_array) !== 2)
 			throw new \Exception('Wrong page file path format:' . $page_path);
 
-		return \E\Package::GetFilePath($page_path_array[0],
+		return \E\Package::Path($page_path_array[0],
 				'pages/' . $page_path_array[1] . '.php');
 	}
 

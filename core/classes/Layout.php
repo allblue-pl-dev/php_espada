@@ -97,7 +97,7 @@ class Layout implements ILayout
         if ($this->validated)
             throw new \Exception('Cannot modify layout after validation.');
 
-        $this->fields = new Fields($fields);
+        $this->fields = $fields;
     }
 
     final public function setPath($layout_path)
@@ -109,7 +109,7 @@ class Layout implements ILayout
         if (count($layout_path_array) !== 2)
             throw new \Exception('Wrong layout path format: ' . $layout_path);
 
-        $this->filePath = Package::GetFilePath($layout_path_array[0],
+        $this->filePath = Package::Path($layout_path_array[0],
                 'layouts/' . $layout_path_array[1] . '.php');
         if ($this->filePath === null)
             throw new \Exception("Layout path `{$layout_path}` does not exist.");

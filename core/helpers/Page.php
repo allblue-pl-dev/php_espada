@@ -30,7 +30,7 @@ class Page
     public function getFilePath()
     {
         if ($this->filePath === null) {
-            $this->filePath = Package::GetFilePath_FromPath($this->path,
+            $this->filePath = Package::Path_FromPath($this->path,
                     'pages', '.php');
             if ($this->filePath === null)
                 throw new \Exception("Page path `{$this->path}` does not exist.");

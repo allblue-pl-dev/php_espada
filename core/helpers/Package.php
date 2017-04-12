@@ -7,14 +7,14 @@ class Package
 
     static private $Overwrites = [];
 
-    static public function GetFileDetails($file_path, $no_overwrites = false)
+    static public function Details($file_path, $no_overwrites = false)
     {
         $file_path = $package . '/' . $path;
 
         if (!$no_overwrites) {
             if (isset(self::$Overwrites[$package])) {
                 foreach (self::$Overwrites[$package] as $to_package => $to_path) {
-                    $details = Package::GetFileDetails($to_package,
+                    $details = Package::Details($to_package,
                         "packages/{$package}/{$path}", true);
                     if ($details !== null)
                         return $details;
@@ -47,7 +47,7 @@ class Package
         return null;
     }
 
-    static public function GetFileDetails_FromPath($path, $dir = '',
+    static public function Details_FromPath($path, $dir = '',
             $ext = '')
     {
         $path_array = explode(':', $path);
@@ -57,11 +57,11 @@ class Package
         if ($dir !== '')
             $dir .= '/';
 
-        return self::GetFileDetails($path_array[0],
+        return self::Details($path_array[0],
                 $dir . $path_array[1] . $ext);
     }
 
-    static public function GetFilePath($package, $path, $no_overwrites = false)
+    static public function Path($package, $path, $no_overwrites = false)
     {
         $file_path = $package . '/' . $path;
         // if ($package === 'site') {
@@ -74,7 +74,7 @@ class Package
         if (!$no_overwrites) {
             if (isset(self::$Overwrites[$package])) {
                 foreach (self::$Overwrites[$package] as $to_package => $to_path) {
-                    $t_path = Package::GetFilePath($to_package,
+                    $t_path = Package::Path($to_package,
                         "packages/{$package}/{$path}", true);
                     if ($t_path !== null)
                         return $t_path;
@@ -91,7 +91,7 @@ class Package
         return null;
     }
 
-    static public function GetFilePath_FromPath($path, $dir = '',
+    static public function Path_FromPath($path, $dir = '',
             $ext = '')
     {
         $path_array = explode(':', $path);
@@ -101,11 +101,11 @@ class Package
         if ($dir !== '')
             $dir .= '/';
 
-        return self::GetFilePath($path_array[0],
+        return self::Path($path_array[0],
                 $dir . $path_array[1] . $ext);
     }
 
-    static public function GetFileUri($package, $path, $no_overwrites = false)
+    static public function Uri($package, $path, $no_overwrites = false)
     {
         $file_path = $package . '/' . $path;
 
@@ -118,7 +118,7 @@ class Package
         if (!$no_overwrites) {
             if (isset(self::$Overwrites[$package])) {
                 foreach (self::$Overwrites[$package] as $to_package => $to_path) {
-                    $uri = Package::GetFileUri($to_package,
+                    $uri = Package::Uri($to_package,
                         "packages/{$package}/{$path}", true);
                     if ($uri !== null)
                         return $uri;
@@ -135,13 +135,13 @@ class Package
         return null;
     }
 
-    static public function GetFileUri_FromPath($path, $dir, $ext)
+    static public function Uri_FromPath($path, $dir, $ext)
     {
         $path_array = explode(':', $path);
         if (count($path_array) !== 2)
             throw new \Exception("Wrong path `{$path}` format.");
 
-        return self::GetFileUri($path_array[0],
+        return self::Uri($path_array[0],
                 $dir . '/' . $path_array[1] . $ext);
     }
 

@@ -38,7 +38,7 @@ class Uri
 
 	static public function File($path, $path_only = true)
 	{
-		$file_uri = Package::GetFileUri_FromPath($path, 'front', '');
+		$file_uri = Package::Uri_FromPath($path, 'front', '');
 		if ($file_uri === null)
 			Notice::Add("Cannot find front file: {$path}.");
 

@@ -167,7 +167,7 @@ class File
 
 	static public function Path($path)
 	{
-		return Package::GetFilePath_FromPath($path);
+		return Package::Path_FromPath($path);
 	}
 
 }
