@@ -48,6 +48,17 @@ class Uri
 		return self::Domain() . $file_uri;
 	}
 
+	static public function Media($package_name, $file_path)
+	{
+		$package_name = mb_strtolower($package_name);
+		$fs_file_path = PATH_MEDIA . '/' . $package_name . '/' . $file_path;
+
+		if (!file_exists($fs_file_path))
+			return null;
+
+		return URI_MEDIA . $package_name . '/' . $file_path;
+	}
+
 	static public function Page($page_name = null, $uri_args = null,
 			$lang_name = '', $path_only = true)
 	{
