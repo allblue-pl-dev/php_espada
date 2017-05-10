@@ -26,6 +26,7 @@ require(__DIR__.'/helpers/File.php');
 require(__DIR__.'/helpers/Package.php');
 require(__DIR__."/helpers/Page.php");
 require(__DIR__."/helpers/Pages.php");
+require(__DIR__."/helpers/Path.php");
 require(__DIR__."/helpers/Uri.php");
 
 
