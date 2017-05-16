@@ -13,4 +13,12 @@ class Path
 		return $fs_file_path;
 	}
 
+	static public function Media_Exists($package_name, $file_path)
+	{
+		$package_name = mb_strtolower($package_name);
+        $fs_file_path = PATH_MEDIA . '/' . $package_name . '/' . $file_path;
+
+		return file_exists($fs_file_path);
+	}
+
 }
