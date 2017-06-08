@@ -81,6 +81,15 @@ class Args
 		return $args;
 	}
 
+	static public function Post_ValidateSize()
+	{
+		if($_SERVER['REQUEST_METHOD'] == 'POST' && empty($_POST) &&
+                empty($_FILES) && $_SERVER['CONTENT_LENGTH'] > 0)
+			return false;
+
+		return true;
+	}
+
 	static public function Uri($name)
 	{
 		if (!isset(self::$Instance->uriArgs[$name]))

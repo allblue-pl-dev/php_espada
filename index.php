@@ -1,5 +1,8 @@
 <?php defined('_ESPADA') or die(NO_ACCESS);
 
+define('PREINIT_CONTENTS', ob_get_contents());
+ob_end_clean();
+
 /* Defines */
 if (!defined('EDEBUG'))
 	define('EDEBUG', false);
