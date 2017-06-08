@@ -56,7 +56,8 @@ class Espada
 
 	static public function Initialize(\E\Site $site)
 	{
-		E\Notice::Add(PREINIT_CONTENTS);
+		if (PREINIT_CONTENTS !== '')
+			E\Notice::Add(PREINIT_CONTENTS);
 
 		if (self::$Instance->site !== null)
 			throw new \Exception("Espada already initialized.");
