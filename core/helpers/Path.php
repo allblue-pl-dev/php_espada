@@ -7,8 +7,13 @@ class Path
 
 	static public function Media($package_name, $file_path)
 	{
+		$package_media_path = PATH_MEDIA . '/' . $package_name;
+		if (!file_exists($package_media_path))
+	  		mkdir($package_media_path);
+
 		$package_name = mb_strtolower($package_name);
-        $fs_file_path = PATH_MEDIA . '/' . $package_name . '/' . $file_path;
+		    $fs_file_path = PATH_MEDIA . '/' . $package_name . '/' . $file_path;
+		    $fs_file_path = $package_media_path . '/' . $file_path;
 
 		return $fs_file_path;
 	}
