@@ -87,14 +87,14 @@ class File
 		\Espada::NotFound();
 	}
 
-	static public function Output($file_name, $content)
+	static public function Output($file_name, $content, $charset ='utf-8')
 	{
 		set_time_limit(0);
 
 		$content_mime_type = \E\File::GetContentMimeType($file_name);
 
 		header('Content-Description: File Transfer');
-		header('Content-Type: ' . $content_mime_type);
+		header("Content-Type: {$content_mime_type}; {$charset}");
 		header('Pragma: public');
 		header('Content-Length: ' . strlen($content));
 		header('Content-Disposition: attachment; filename="' . $file_name . '"');
