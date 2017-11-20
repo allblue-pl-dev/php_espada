@@ -5,6 +5,11 @@ defined('_ESPADA') or die(NO_ACCESS);
 class Path
 {
 
+	static public function File($e_path)
+	{
+		return File::Path($e_path);
+	}
+
 	static public function Media($package_name, $file_path)
 	{
 		$package_name = mb_strtolower($package_name);
