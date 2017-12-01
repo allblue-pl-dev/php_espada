@@ -20,8 +20,7 @@ class Exception
 
 	static public function ExceptionHandler($e)
 	{
-		foreach (self::$OnErrorListeners as $on_error_listener)
-			$on_error_listener($e);
+		self::NotifyListeners($e);
 
 		if (!EDEBUG)
 			die (INTERNAL_ERROR_MESSAGE);
@@ -49,6 +48,12 @@ class Exception
 		}
 
 		die();
+	}
+
+	static public function NotifyListeners($e)
+	{
+		foreach (self::$OnErrorListeners as $on_error_listener)
+			$on_error_listener($e);
 	}
 
 	static public function RemoveOnErrorListener(callable $exception_listener)
