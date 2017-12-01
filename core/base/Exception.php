@@ -5,11 +5,11 @@ defined('_ESPADA') or die(NO_ACCESS);
 class Exception
 {
 
-	static private $Listeners = [];
+	static private $OnErrorListeners = [];
 
-	static public function AddListener(callable $exception_listener)
+	static public function AddOnErrorListener(callable $exception_listener)
 	{
-		self::$Listeners[] = $exception_listener;
+		self::$OnErrorListeners[] = $exception_listener;
 	}
 
 	static public function ErrorHandler($errno, $errstr, $errfile,
@@ -20,6 +20,9 @@ class Exception
 
 	static public function ExceptionHandler($e)
 	{
+		foreach (self::$OnErrorListeners as $on_error_listener)
+			$on_error_listener($e);
+
 		if (!EDEBUG)
 			die (INTERNAL_ERROR_MESSAGE);
 
@@ -48,13 +51,13 @@ class Exception
 		die();
 	}
 
-	static public function RemoveListener(callable $exception_listener)
+	static public function RemoveOnErrorListener(callable $exception_listener)
 	{
-		$index = array_search($exception_listener, self::$Listeners);
+		$index = array_search($exception_listener, self::$OnErrorListeners);
 		if ($index === false)
 			throw new \Exception('`exception_listener` not in listeners array.');
 
-		array_splice(self::$Listeners, $index, 1);
+		array_splice(self::$OnErrorListeners, $index, 1);
 	}
 
 	// static public function ShutdownHandler()
