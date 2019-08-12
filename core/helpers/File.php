@@ -143,8 +143,10 @@ class File
 		flush();
 
 		$handle = fopen($file_path, "rb");
-		while (!feof($handle))
-    		echo fread($handle, 8192);
+		while (!feof($handle)) {
+            echo fread($handle, 8192);
+            flush();
+        }
 		fclose($handle);
 	}
 
@@ -159,8 +161,7 @@ class File
 			$mimetype = finfo_file($finfo, $filename);
 			finfo_close($finfo);
 			return $mimetype;
-		}
-		else {
+		} else {
 			return 'application/octet-stream';
 		}
 	}
